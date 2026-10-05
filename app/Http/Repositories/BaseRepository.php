@@ -2,20 +2,17 @@
 
 namespace App\Http\Repositories;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
-class BaseRepository {
-
+class BaseRepository
+{
     public function __construct(private Model $model)
     {}
 
-    public function index(array $data)
+    public function index(Builder $builder)
     {
-        return $this->model->query()->where(function ($query) use($data) {
-            if (data_get($data, 'name')) {
-                $query->where('name', 'like', '%' . $data['name'] . '%');
-            }
-        })->get();
+        return $builder->get();
     }
 
     public function store(array $data)

@@ -2,35 +2,17 @@
 
 namespace App\Http\Services;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Http\Repositories\ClassroomRepository;
 
-class BaseService{
-
-public function __construct(private Model $repository)
-{}
-
-    public function index(array $data)
+class ClassroomService extends BaseService
+{
+    public function __construct(private ClassroomRepository $classroomRepository)
     {
-        return $this->repository->index($data);
+        parent::__construct($classroomRepository);
     }
 
-    public function store(array $data)
+    public function getWithFilters(array $data)
     {
-        return $this->repository->store($data);
-    }
-
-    public function show(string $id)
-    {
-        return $this->repository->show($id);
-    }
-
-    public function update(array $data, string $id)
-    {
-        return $this->repository->update($data, $id);
-    }
-
-    public function destroy(string $id)
-    {
-        $this->repository->destroy($id);
+        return $this->classroomRepository->getWithFilters($data);
     }
 }

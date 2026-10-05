@@ -11,4 +11,8 @@ class ClassroomService extends BaseService
         parent::__construct($classroomRepository);
     }
 
+    public function getWithFilters(array $data)
+    {
+        return $this->classroomRepository->getWithFilters($data);
+    }
 }
